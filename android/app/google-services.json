@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1088458980203",
+    "firebase_url": "https://bloodbank-925ad-default-rtdb.firebaseio.com",
+    "project_id": "bloodbank-925ad",
+    "storage_bucket": "bloodbank-925ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088458980203:android:913641d47d7c01f5cbaa2e",
+        "android_client_info": {
+          "package_name": "com.example.blood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088458980203-neak3k2jrej67ttkv031j8bf9lulifso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkdO-N3EZvPB-wb6RUppSdLMnw8g88N5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088458980203-neak3k2jrej67ttkv031j8bf9lulifso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
