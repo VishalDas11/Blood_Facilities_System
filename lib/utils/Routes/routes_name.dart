@@ -12,7 +12,7 @@ class RoutesName {
   static const String home = 'home_Screen';
 
   // TODO Blood Donate Form
-  static const String bloodDonate = 'Blood_Dontate_Form';
+  static const String bloodDonate = 'Blood_Donate_Form';
 
   // TODO Blood Request Form
   static const String bloodRequest = 'Blood_Request_Form';
@@ -21,7 +21,7 @@ class RoutesName {
   static const String bloodRequestList = 'Blood_Request_List';
 
   // TODO Blood Donater List
-  static const String bloodDonaterList = 'Blood_Request_List';
+  static const String bloodDonaterList = 'Blood_Donater_List';
 
   // // TODO  Check Email Verification
   // static const String emailVerification = 'Email Verification';

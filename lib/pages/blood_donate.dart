@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -30,6 +29,8 @@ class _BloodDonateState extends State<BloodDonate> {
 
   final _firestore = FirebaseFirestore.instance.collection('BloodDonateForm');
 
+
+// TODO  Get Current Location
   Future<Position> getUserCurrentLocation () async{
     await Geolocator.requestPermission().then((value){
 
@@ -43,7 +44,6 @@ class _BloodDonateState extends State<BloodDonate> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text("Blood Donate"),
         centerTitle: true,
@@ -84,13 +84,10 @@ class _BloodDonateState extends State<BloodDonate> {
                       Field(hintText: "Mirpurkhas", label: "CITY", controller: citycontroller),
                       const SizedBox(height: 20,),
 
-                      DropDown(
-                        hinttext: "Blood Group",
-                        controller: bloodController,
-                      ),
+                      DropDown(hinttext: "Blood Group", controller: bloodController,),
                       const SizedBox(height: 20,),
 
-                      // TODO  Set Current Location
+                      // TODO  Get Current Location
 
                       InkWell(
                         onTap: ()async{
@@ -127,7 +124,7 @@ class _BloodDonateState extends State<BloodDonate> {
                             setState(() {
                               loading = true;
                             });
-                            String uid = FirebaseAuth.instance.currentUser!.uid;
+                            String uid = DateTime.now().microsecondsSinceEpoch.toString();
                            _firestore.doc(uid).set({
                              'Name' : namecontroller.text,
                              'Phone Number' : phoneNumbercontroller.text,
@@ -142,6 +139,8 @@ class _BloodDonateState extends State<BloodDonate> {
                              Utils().toastMassage("Submit Successfully");
                               namecontroller.clear();
                               phoneNumbercontroller.clear();
+                              citycontroller.clear();
+                              bloodController.clearDropDown();
                            }).onError((error, stackTrace){
                              setState(() {
                                loading = false;

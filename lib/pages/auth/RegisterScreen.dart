@@ -28,73 +28,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool loading = false;
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
-
   final _firestore = FirebaseFirestore.instance.collection('Userdata');
-  // DatabaseReference _firestore = FirebaseDatabase.instance.ref('Userdata');
 
-  // register() {
-  //   if (_formKey.currentState!.validate()) {
-  //     // setState(() {
-  //     //   loading =true;
-  //     // });
-  //     // String uid = FirebaseAuth.instance.currentUser!.uid;
-  //
-  //       Navigator.push(context, MaterialPageRoute(builder: (context)=>
-  //           VerifyEmail(
-  //             name: nameController.text,
-  //             email: emailController.text,
-  //             city: cityController.text,
-  //             blood: bloodController.dropDownValue!.name,
-  //             phoneNumber: phoneNumberController.text,
-  //             password: passwordController.text,
-  //           )));
-  //
-  //       // await _auth.createUserWithEmailAndPassword(
-  //       //
-  //       //
-  //       //     email: emailController.text,
-  //       //     password: passwordController.text.toString()).then((value) {
-  //       //   // Navigator.pushNamed(context, RoutesName.emailVerification);
-  //       //   _firestore.doc(value.user!.uid).set({
-  //       //     "Name": nameController.text,
-  //       //     "Email": emailController.text,
-  //       //     "PhoneNumber": phoneNumberController.text,
-  //       //     "City": cityController.text,
-  //       //     "Blood Group": bloodController.dropDownValue!.name,
-  //       //   }).then((value) {
-  //       //     Navigator.pushNamed(context, RoutesName.login);
-  //       //     Utils().toastMassage('User Create Sucessfully');
-  //       //   }).onError((error, stackTrace) {
-  //       //
-  //       //   });
-  //       // });
-  //
-  //         }
-  //     }
-  //
-  //     // await _auth.createUserWithEmailAndPassword(
-  //     //     email: emailController.text,
-  //     //     password: passwordController.text.toString()).then((value){
-  //     //   // Navigator.pushNamed(context, RoutesName.emailVerification);
-  //     //   _firestore.doc(value.user!.uid).set({
-  //     //     "Name": nameController.text,
-  //     //     "Email": emailController.text,
-  //     //     "PhoneNumber": phoneNumberController.text,
-  //     //     "City": cityController.text,
-  //     //     "Blood Group": bloodController.dropDownValue!.name,
-  //     // }).then((value){
-  //     //   Navigator.pushNamed(context, RoutesName.login);
-  //     //   Utils().toastMassage('User Create Sucessfully');
-  //     //
-  //     //   }).onError((error, stackTrace){
-  //     //     setState(() {
-  //     //       loading = false;
-  //     //     });
-  //     //     Utils().toastMassage(error.toString());
-  //     //   });
-  //     // });
+  // TODO     Register Button Functionality
+  register(){
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        loading =true;
+      });
+      String uid = DateTime.now().microsecondsSinceEpoch.toString();
+      _auth.createUserWithEmailAndPassword(
+          email: emailController.text.toString(),
+          password: passwordController.text.toString()).then((value){
 
-  //
+        _firestore.doc(uid).set({
+          "Name": nameController.text,
+          "Email": emailController.text,
+          "PhoneNumber": phoneNumberController.text,
+          "City": cityController.text,
+          "Blood Group": bloodController.dropDownValue!.name,
+        });
+      }).then((value){
+        Navigator.pushNamed(context, RoutesName.login);
+        Utils().toastMassage('Register Successfully');
+        setState(() {
+          loading= false;
+        });
+      }).onError((error, stackTrace){
+        Utils().toastMassage(error.toString());
+      });
+    }
+  }
   @override
   void dispose(){
     super.dispose();
@@ -129,25 +93,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 25,),
 
                 // TODO Email TextFormField
-                Field(hintText: "Enter Email", label: "Email",
-                  controller: emailController, prefixIcon: Icon(Icons.email),),
+                Field(hintText: "Enter Email", label: "Email", controller: emailController, prefixIcon: Icon(Icons.email),),
                 const SizedBox(height: 25,),
 
                 // TODO Phone Number TextFormField
-                Field(hintText: "Enter Phone Number", label: "Phone Number",
-                  controller: phoneNumberController, prefixIcon: Icon(Icons.call),),
+                Field(hintText: "Enter Phone Number", label: "Phone Number", controller: phoneNumberController, prefixIcon: Icon(Icons.call),),
                 const SizedBox(height: 25,),
 
                 // TODO City TextFormField
-                Field(hintText: "Enter City", label: "City",
-                  controller: cityController, prefixIcon: Icon(Icons.location_city_outlined),),
+                Field(hintText: "Enter City", label: "City",controller: cityController, prefixIcon: Icon(Icons.location_city_outlined),),
                 const SizedBox(height: 25,),
 
                 // TODO Password TextFormField
-                Field(hintText: "Enter Password", label: "Password",
-                  controller: passwordController, suffixIcon: Icon(Icons.visibility_off), obsecure: true,
-                  prefixIcon: Icon(Icons.lock) ,
-                ),
+                Field(hintText: "Enter Password", label: "Password",controller: passwordController, suffixIcon: Icon(Icons.visibility_off), obsecure: true, prefixIcon: Icon(Icons.lock) ,),
                 const SizedBox(height: 25,),
 
                 // TODO DropDownTextField
@@ -161,31 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     textColor: Colors.white,
                     loading: loading,
                     onPress: () {
-                      if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          loading =true;
-                        });
-                        String uid = FirebaseAuth.instance.currentUser!.uid;
-                        _auth.createUserWithEmailAndPassword(
-                            email: emailController.text.toString(),
-                            password: passwordController.text.toString()).then((value){
-
-                            }).then((value){
-                              _firestore.doc(uid).set({
-                                "Name": nameController.text,
-                                "Email": emailController.text,
-                                "PhoneNumber": phoneNumberController.text,
-                                "City": cityController.text,
-                                "Blood Group": bloodController.dropDownValue!.name,
-
-                              }).onError((error, stackTrace){
-                                setState(() {
-                                  loading = false;
-                                });
-                                Utils().toastMassage(error.toString());
-                              });
-                          });
-                      }
+                      register();
                     }),
                 const SizedBox(
                   height: 25,

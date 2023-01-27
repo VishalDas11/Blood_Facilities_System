@@ -28,10 +28,10 @@ class _MyDrawerState extends State<MyDrawer> {
                   backgroundImage: AssetImage('assets/person.png')
                 ),
                 accountName: Text("Vishal Das"),
-
                 accountEmail: Text("vdas4088@gmail.com"),
             )
             ),
+
             Tile(title: 'Home', icon: 'assets/icon/home.png', onpress: (){
               Navigator.pushNamed(context, RoutesName.home);
             },),
