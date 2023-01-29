@@ -27,21 +27,20 @@ class _HomeScreenState extends State<HomeScreen> {
         return false;
       },
       child: Scaffold(
+          drawer: MyDrawer(),
           appBar: AppBar(title: "Blood Facilities System".text.color(AppColor.blackColor).make(),
              elevation: 0,
              backgroundColor: AppColor.bgColor,
              leading: Builder(
                builder: (BuildContext context){
-                 return IconButton(onPressed: (){
-                    Scaffold.of(context).openDrawer();
-                 }, icon: Icon(Icons.view_headline_sharp, color: Colors.black,));
+                 return InkWell(
+                     onTap: (){
+                       Scaffold.of(context).openDrawer();
+                     },
+                     child: Icon(Icons.view_headline_sharp, color: Colors.black,));
+
                },
              ),
-
-             // IconButton(onPressed: () {
-             //   MyDrawer();
-             // },
-             //   icon: Icon(Icons.view_headline_sharp, color: Colors.black, size: 28,),),
 
              actions: [
                InkWell(

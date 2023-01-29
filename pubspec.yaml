@@ -56,6 +56,9 @@ dependencies:
   location: ^4.4.0
   flutter_polyline_points: ^1.0.0
   http: ^0.13.5
+  # calling dependencies
+  flutter_phone_direct_caller: ^2.1.1
+  url_launcher: ^6.1.8
 
 
 dev_dependencies:

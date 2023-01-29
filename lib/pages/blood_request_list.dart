@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class BloodRequestList extends StatefulWidget {
@@ -86,41 +87,22 @@ class _BloodRequestListState extends State<BloodRequestList> {
                                ],
                              ).centered().pOnly(left: 10,top: 5),
 
-                             trailing:Column(
-                               children: [
-                                 Container(
-                                   width: 50,
-                                   height: 50,
-                                   decoration: BoxDecoration(
-                                       color:  Colors.green[300],
-                                       shape: BoxShape.circle,
-                                       border: Border.all(color: Colors.green, width: 3)
-                                   ),
-                                   child: Center(child: Icon(Icons.call, color: Colors.black,)),
-                                 ),
-                                 // SizedBox(height: 5,),
-
-                                 // Container(
-                                 //   width: 80,
-                                 //   height: 25,
-                                 //   decoration: BoxDecoration(
-                                 //       color:  Colors.pink,
-                                 //       borderRadius: BorderRadius.circular(30),
-                                 //       border: Border.all(color: Colors.pink)
-                                 //   ),
-                                 //   child: Row(
-                                 //     mainAxisAlignment: MainAxisAlignment.center,
-                                 //     children: [
-                                 //       const Icon(Icons.location_on_outlined),
-                                 //       const SizedBox(width: 5,),
-                                 //       "Map".text.make()
-                                 //     ],
-                                 //   ).pSymmetric(h: 5),
-                                 // ),
-
-                               ],
+                             trailing:Container(
+                               width: 50,
+                               height: 50,
+                               decoration: BoxDecoration(
+                                   color:  Colors.green[300],
+                                   shape: BoxShape.circle,
+                                   border: Border.all(color: Colors.green, width: 3)
+                               ),
+                               child: Center(
+                                   child: InkWell(
+                                   onTap: (){
+                                     // snapshot.data!.docs[index]['Phone Number'].toString();
+                                     FlutterPhoneDirectCaller.callNumber(snapshot.data!.docs[index]['Phone Number']);
+                                   },
+                                   child: Icon(Icons.call, color: Colors.black,))),
                              ),
-                             isThreeLine: true,
 
                            ),
                          ),
